@@ -1,0 +1,16 @@
+{
+  "name": "visualize-github",
+  "version": "1.0.0",
+  "description": "visualizing user repo data with github api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Polina Soshnin",
+  "license": "MIT",
+  "dependencies": {
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "underscore": "^1.8.3"
+  }
+}
