@@ -14,7 +14,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var GithubStrategy = require('passport-github2').Strategy;
-var partial = require('express-partial');
+var partials = require('express-partials');
 
 /*************************************************************
 Github App Credentials
@@ -81,7 +81,7 @@ Express Setup
 var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-app.use(partial());
+app.use(partials());
 app.use(bodyParser());
 app.use(methodOverride());
 app.use(session({
@@ -121,7 +121,7 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login'}),
   function(req, res) {
-    res.redirect('/');
+    res.redirect('/account');
   });
 
 app.get('/logout', function(req, res) {

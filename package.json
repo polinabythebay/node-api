@@ -12,7 +12,7 @@
     "body-parser": "^1.14.1",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
-    "express-partial": "^0.1.0",
+    "express-partials": "^0.3.0",
     "express-session": "^1.12.1",
     "http": "0.0.0",
     "https": "^1.0.0",
