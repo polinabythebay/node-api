@@ -17,12 +17,15 @@ var GithubStrategy = require('passport-github2').Strategy;
 var partials = require('express-partials');
 
 /*************************************************************
+Local dependencies
+**************************************************************/
+var github = require('./github');
+var config = require('./env/config');
+
+/*************************************************************
 Github App Credentials
 https://developer.github.com/v3/oauth/
 **************************************************************/
-
-var GITHUB_CLIENT_ID = '15a6b199bd8bb5211b3a';
-var GITHUB_CLIENT_SECRET = '7554a2f8c18faff9abe4f7772172857c3b72966f';
 
 /*************************************************************
 Passport Session Setup
@@ -46,8 +49,8 @@ Github Strategy Setup
 **************************************************************/
 
 passport.use(new GithubStrategy({
-  clientID: GITHUB_CLIENT_ID,
-  clientSecret: GITHUB_CLIENT_SECRET,
+  clientID: config.GITHUB_CLIENT_ID,
+  clientSecret: config.GITHUB_CLIENT_SECRET,
   callbackURL: "http://127.0.0.1:3000/auth/github/callback"
   },
   function(accessToken, refreshToken, profile, done) {
@@ -127,6 +130,15 @@ app.get('/auth/github/callback',
 app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
+});
+
+app.get('/repos', ensureAuthenticated, function(req, res) {
+ console.log("user", req.user.username);
+
+  github.getRepoData(function(result) {
+    // console.log("languages\n", result);
+    res.render('repos',{ user: req.user, repos: result });
+  });
 });
 
 app.listen(3000);

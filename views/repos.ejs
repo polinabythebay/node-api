@@ -1,0 +1,13 @@
+
+<p>Username: <%= user.username %></p>
+
+<p> Languages in my repo <p>
+
+<table>
+<% for(var key in repos) { %>
+   <tr>
+     <td><%= key %></td>
+     <td><%= repos[key] %></td>
+   </tr>
+<% } %>
+</table>

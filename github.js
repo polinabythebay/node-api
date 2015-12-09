@@ -4,6 +4,7 @@ var https = require('https');
 /*************************************************************
 Underscore Mixin
 **************************************************************/
+
 _.mixin({
     'sortKeysBy': function (obj, comparator) {
         var keys = _.sortBy(_.keys(obj), function (key) {
@@ -16,16 +17,16 @@ _.mixin({
     }
 });
 
-var languageRank = function(arr) {
+var getLanguageRank = function(arr) {
 
   var languages = {};
 
   _.each(arr, function(item) {
     if (item.language === null) {
       if (languages["No Language"]) {
-        ++languages["No Language"];
+        //++languages["No Language"];
       } else {
-        languages["No Language"] = 1;
+        // languages["No Language"] = 1;
       }
     } else if (languages[item.language]) {
       ++languages[item.language];
@@ -38,39 +39,50 @@ var languageRank = function(arr) {
   //changes from ascending to descending sort
     return -(value);
   });
-
 }
 
 /*************************************************************
 Github Repo Data
 **************************************************************/
 
-var options = {
-  "method": "GET",
-  "hostname": "api.github.com",
-  "path": "/users/polinadotio/repos?per_page=100",
-  "headers": {
-    "User-Agent": "polinadotio"
-  }
-};
+exports.getRepoData = function(username, callback) {
 
-var repo_data;
+  var options = {
+    "method": "GET",
+    "hostname": "api.github.com",
+    "path": "/users/"+username+"/repos?per_page=100",
+    "headers": {
+      "User-Agent": "polinadotio"
+    }
+  };
 
-var req = https.request(options, function (res) {
-  var chunks = [];
+  var repo_data;
 
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
+  var req = https.request(options, function (res) {
+    var chunks = [];
+
+    res.on("data", function (chunk) {
+      chunks.push(chunk);
+    });
+
+    res.on("end", function () {
+      var body = Buffer.concat(chunks);
+      repo_data = JSON.parse(body.toString());
+      // console.log("languages\n", languageRank(repo_data));
+      var result = getLanguageRank(repo_data);
+      callback(result);
+    });
   });
 
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-    repo_data = JSON.parse(body.toString());
-    console.log("languages\n", languageRank(repo_data));
-  });
-});
+  req.end();
+}
 
-req.end();
+
+
+// getRepoData(function(result) {
+//   console.log("languages\n", result);
+// });
+
 
 
 
