@@ -135,7 +135,7 @@ app.get('/logout', function(req, res) {
 app.get('/repos', ensureAuthenticated, function(req, res) {
  console.log("user", req.user.username);
 
-  github.getRepoData(function(result) {
+  github.getRepoData(req.user.username, function(result) {
     // console.log("languages\n", result);
     res.render('repos',{ user: req.user, repos: result });
   });

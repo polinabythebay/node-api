@@ -77,11 +77,9 @@ exports.getRepoData = function(username, callback) {
   req.end();
 }
 
-
-
-// getRepoData(function(result) {
-//   console.log("languages\n", result);
-// });
+exports.getRepoData('polinadotio',function(result) {
+  console.log("languages\n", result);
+});
 
 
 

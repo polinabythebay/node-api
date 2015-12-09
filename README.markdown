@@ -1,7 +1,13 @@
-### Exploring APIs with Node.js
+### Exploring APIs
 
-I'm using Node.js + two libraries (https + Underscore.js) to explore APIs and answer interesting questions.
+Using
 
-A few questions I'm looking at:
+- Node.js
+- Express.js
+- Underscore.js
 
-- Looking at the most popular languages in a Github user repo
+...And more!
+
+APIs I'm looking at
+
+- Github
