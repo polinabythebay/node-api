@@ -2,15 +2,23 @@
   "name": "visualize-github",
   "version": "1.0.0",
   "description": "visualizing user repo data with github api",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Polina Soshnin",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.14.1",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-partial": "^0.1.0",
+    "express-session": "^1.12.1",
     "http": "0.0.0",
     "https": "^1.0.0",
+    "method-override": "^2.3.5",
+    "passport": "^0.3.2",
+    "passport-github2": "^0.1.9",
     "underscore": "^1.8.3"
   }
 }
